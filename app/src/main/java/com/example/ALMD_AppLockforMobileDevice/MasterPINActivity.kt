@@ -26,10 +26,11 @@ class MasterPINActivity : AppCompatActivity() {
         setContentView(R.layout.master_pin_initial_setup)
 
         val sharedPref_masterPin = getSharedPreferences("masterPin", MODE_PRIVATE)
+        val master_Pin: String? = sharedPref_masterPin.getString("masterPIN", null)
         val editor_masterPin = sharedPref_masterPin.edit()
 
         val sharedPref_lockedAppsList = getSharedPreferences("lockedAppsList", MODE_PRIVATE)
-        val lockedAppsList: MutableSet<String> = sharedPref_lockedAppsList.getStringSet("lockedAppsList", null) as MutableSet<String>
+        val lockedAppsList: MutableSet<String>? = sharedPref_lockedAppsList.getStringSet("lockedAppsList", null)
 
         inpCode1 = findViewById(R.id.inputCode1)
         inpCode2 = findViewById(R.id.inputCode2)
@@ -42,7 +43,7 @@ class MasterPINActivity : AppCompatActivity() {
 
         val masterPinInitialSetupBackBtn = findViewById<Button>(R.id.masterPinInitialSetup_backBtn)
         masterPinInitialSetupBackBtn.setOnClickListener {
-            if (masterPin != null) {
+            if ((master_Pin != null) && (lockedAppsList != null)) {
                 val toMainMenu = Intent(this,MainMenuActivity::class.java)
                 startActivity(toMainMenu)
             } else {
@@ -50,41 +51,6 @@ class MasterPINActivity : AppCompatActivity() {
                 startActivity(toDevNotes)
             }
         }
-
-//        val masterPinInitialSetupNextBtn = findViewById<Button>(R.id.masterPinInitialSetup_nextBtn)
-//        masterPinInitialSetupNextBtn.setOnClickListener(object: View.OnClickListener {
-//            override fun onClick(v: View) {
-//                if (inpCode1.text.toString().trim().isEmpty() ||
-//                    inpCode2.text.toString().trim().isEmpty() ||
-//                    inpCode3.text.toString().trim().isEmpty() ||
-//                    inpCode4.text.toString().trim().isEmpty() ||
-//                    inpCode5.text.toString().trim().isEmpty() ||
-//                    inpCode6.text.toString().trim().isEmpty()
-//                ) {
-//                    Toast.makeText(
-//                        applicationContext,
-//                        "Please enter valid code",
-//                        Toast.LENGTH_SHORT
-//                    ).show()
-//                    return
-//                }
-//
-//                masterPin = inpCode1.text.toString() +
-//                        inpCode2.text.toString() +
-//                        inpCode3.text.toString() +
-//                        inpCode4.text.toString() +
-//                        inpCode5.text.toString() +
-//                        inpCode6.text.toString()
-//
-//                for (i in 0..2) {
-//                    Toast.makeText(
-//                        applicationContext,
-//                        "Screenshot this for later:\nApp Lock Master PIN: $masterPin",
-//                        Toast.LENGTH_SHORT
-//                    ).show()
-//                }
-//            }
-//        })
 
         val masterPinInitialSetupNextBtn = findViewById<Button>(R.id.masterPinInitialSetup_nextBtn)
         masterPinInitialSetupNextBtn.setOnClickListener(View.OnClickListener{
@@ -112,9 +78,14 @@ class MasterPINActivity : AppCompatActivity() {
             editor_masterPin.putString("masterPIN", masterPin)
             editor_masterPin.apply()
 
-
-            val toMainMenu = Intent(this,MainMenuActivity::class.java)
-            startActivity(toMainMenu)
+            if ((master_Pin != null) && (lockedAppsList != null))
+            {
+                val toMainMenu = Intent(this,MainMenuActivity::class.java)
+                startActivity(toMainMenu)
+            } else {
+                val toMobileApplicationsSelection = Intent(this, MobileApplicationsActivity::class.java)
+                startActivity(toMobileApplicationsSelection)
+            }
         })
     }
 
@@ -200,5 +171,9 @@ class MasterPINActivity : AppCompatActivity() {
 
             override fun afterTextChanged(s: Editable?) { }
         })
+    }
+
+    override fun onBackPressed() {
+        return
     }
 }

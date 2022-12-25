@@ -12,12 +12,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.NotificationCompat.getGroup
 
 
 class MobileApplicationsActivity : AppCompatActivity() {
 
-    var lockedAppList: MutableList<LockedAppList>? = ArrayList()
+    val lockedAppsList: MutableList<String> = ArrayList()
 
     private var allApps: List<AppList>? = null
     private var appAdapter: AppAdapter? = null
@@ -28,12 +27,11 @@ class MobileApplicationsActivity : AppCompatActivity() {
         setContentView(R.layout.mobile_applications_selection)
 
         val sharedPref_masterPin = getSharedPreferences("masterPin", MODE_PRIVATE)
-        val masterPIN: String? = sharedPref_masterPin.getString("masterPin", null)
+        val master_Pin: String? = sharedPref_masterPin.getString("masterPIN", null)
 
         val sharedPref_lockedAppsList = getSharedPreferences("lockedAppsList", MODE_PRIVATE)
+        val lockedApps_List = sharedPref_lockedAppsList.getStringSet("lockedAppsList", setOf<String>())?.toMutableList()
         val editor_lockedAppsList = sharedPref_lockedAppsList.edit()
-
-        val set: MutableSet<String> = HashSet()
 
 //        this.cacheDir.deleteRecursively()
 
@@ -41,9 +39,28 @@ class MobileApplicationsActivity : AppCompatActivity() {
 
         val mobileApplicationsSelectionBackBtn = findViewById<Button>(R.id.mobileApplicationsSelection_backBtn)
         mobileApplicationsSelectionBackBtn.setOnClickListener {
-        val toMasterPINActivity = Intent(this, MasterPINActivity::class.java)
-            startActivity(toMasterPINActivity)
+            if ((master_Pin != null) && (lockedAppsList != null)) {
+                val toMainMenuActivity = Intent(this, MainMenuActivity::class.java)
+                startActivity(toMainMenuActivity)
+            } else {
+                val toMasterPINActivity = Intent(this, MasterPINActivity::class.java)
+                startActivity(toMasterPINActivity)
+            }
         }
+
+        val mobileApplicationsSelectionNextBtn = findViewById<Button>(R.id.mobileApplicationsSelection_nextBtn)
+        mobileApplicationsSelectionNextBtn.setOnClickListener (View.OnClickListener{
+            editor_lockedAppsList.putStringSet("lockedAppsList", lockedAppsList.toSet())
+            editor_lockedAppsList.apply()
+
+            if ((master_Pin != null) && (lockedAppsList != null)) {
+                val toMainMenuActivity = Intent(this, MainMenuActivity::class.java)
+                startActivity(toMainMenuActivity)
+            } else {
+                Toast.makeText(applicationContext, "Please select at least 1 application to lock", Toast.LENGTH_SHORT).show()
+                return@OnClickListener
+            }
+        })
     }
 
     fun displayAllApps(view: View?) {
@@ -102,14 +119,6 @@ class MobileApplicationsActivity : AppCompatActivity() {
             return position.toLong()
         }
 
-//        override fun getViewTypeCount(): Int {
-//            return count
-//        }
-//
-//        override fun getItemViewType(position: Int): Int {
-//            return position
-//        }
-
         override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
             var convertView: View? = convertView
             var viewHolder: ViewHolder
@@ -133,9 +142,9 @@ class MobileApplicationsActivity : AppCompatActivity() {
                 val isChecked: Boolean = viewHolder.checkBoxInListView!!.isChecked
                 checkedState[position] = isChecked
                 if (isChecked) {
-                    lockedAppList!!.add(LockedAppList(listStorage!![position].toString()))
+                    lockedAppsList.add(viewHolder.textInListView!!.text as String)
                 } else {
-                    lockedAppList!!.remove(LockedAppList(listStorage!![position].toString()))
+                    lockedAppsList.remove(viewHolder.textInListView!!.text as String)
                 }
             }
 
@@ -179,23 +188,7 @@ class MobileApplicationsActivity : AppCompatActivity() {
         }
     }
 
-    inner class LockedAppList(private var name: String) {
-        private var selected: Boolean? = null
-
-        init {
-            this.name = name
-        }
-
-        fun getName(): String {
-            return name
-        }
-
-        fun isSelected(): Boolean? {
-            return selected
-        }
-
-        fun setSelected(checked: Boolean) {
-            this.selected = selected
-        }
+    override fun onBackPressed() {
+        return
     }
 }

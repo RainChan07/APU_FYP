@@ -19,8 +19,14 @@ class MainMenuActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_menu)
 
+        val sharedPref_lockedAppsList = getSharedPreferences("lockedAppsList", MODE_PRIVATE)
+        val editor_lockedAppsList = sharedPref_lockedAppsList.edit()
+
         val mainMenuModifyLockedAppsBtn = findViewById<Button>(R.id.mainMenu_modifyLockedAppsBtn)
         mainMenuModifyLockedAppsBtn.setOnClickListener {
+            editor_lockedAppsList.clear()
+            editor_lockedAppsList.apply()
+
             val toMobileApplicationsSelection = Intent(this, MobileApplicationsActivity::class.java)
             startActivity(toMobileApplicationsSelection)
         }
@@ -33,5 +39,10 @@ class MainMenuActivity : AppCompatActivity() {
 
         //switch for fingerprint
 
+
+    }
+
+    override fun onBackPressed() {
+        return
     }
 }

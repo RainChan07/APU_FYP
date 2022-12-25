@@ -23,4 +23,8 @@ class DevNotesActivity : AppCompatActivity() {
             startActivity(toMasterPINActivity)
         }
     }
+
+    override fun onBackPressed() {
+        return
+    }
 }

@@ -11,10 +11,10 @@ class GetStartedActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.get_started)
 
-        val sharedPref = getSharedPreferences("masterPin", MODE_PRIVATE)
-        val masterPIN: String? = sharedPref.getString("masterPin", null)
+        val sharedPref_masterPin = getSharedPreferences("masterPin", MODE_PRIVATE)
+        val master_Pin: String? = sharedPref_masterPin.getString("masterPIN", null)
 
-        if (masterPIN != null) {
+        if (master_Pin != null) {
             val toMainMenu = Intent(this,MainMenuActivity::class.java)
             startActivity(toMainMenu)
         }

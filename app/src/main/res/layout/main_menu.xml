@@ -40,7 +40,7 @@
         android:id="@+id/mainMenu_modifyLockedAppsBtn"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="32dp"
         android:text="Modify Locked Applications"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
@@ -51,7 +51,7 @@
         android:id="@+id/mainMenu_modifyMasterPinBtn"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="16dp"
         android:text="Modify Master PIN"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
@@ -60,19 +60,27 @@
 
     <Switch
         android:id="@+id/toggleFingerprint"
-        android:layout_width="0dp"
+        android:layout_width="251dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="80dp"
+        android:layout_marginTop="16dp"
         android:text="Enable Fingerprint Unlock"
+        android:textColor="#000000"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mainMenu_modifyMasterPinBtn"
-        app:layout_constraintVertical_bias="0.006" />
+        app:layout_constraintTop_toBottomOf="@+id/mainMenu_modifyMasterPinBtn" />
 
+<!--    <ListView-->
+<!--        android:id="@+id/all_apps_list"-->
+<!--        android:layout_width="375dp"-->
+<!--        android:layout_height="0dp"-->
+<!--        android:layout_marginTop="24dp"-->
+<!--        android:layout_marginBottom="32dp"-->
+<!--        android:textColor="#000000"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/toggleFingerprint"-->
+<!--        app:layout_constraintVertical_bias="1.0" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
