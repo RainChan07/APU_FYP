@@ -15,8 +15,8 @@ class GetStartedActivity : AppCompatActivity() {
         val master_Pin: String? = sharedPref_masterPin.getString("masterPIN", null)
 
         if (master_Pin != null) {
-            val toMainMenu = Intent(this,MainMenuActivity::class.java)
-            startActivity(toMainMenu)
+            val toUserVerification = Intent(this,UserVerificationActivity::class.java)
+            startActivity(toUserVerification)
         }
 
         val getStartedNextBtn = findViewById<Button>(R.id.getStarted_nextBtn)

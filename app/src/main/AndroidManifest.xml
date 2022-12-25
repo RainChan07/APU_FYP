@@ -24,7 +24,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ALMD_AppLockforMobileDevice"
         tools:targetApi="31">
-
+        <activity
+            android:name=".EnterPINActivity"
+            android:exported="false" />
         <activity
             android:name=".GetStartedActivity"
             android:configChanges="orientation"
@@ -36,33 +38,31 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".DevNotesActivity"
             android:configChanges="orientation"
             android:exported="true"
-            android:screenOrientation="portrait">
-        </activity>
-
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".MasterPINActivity"
             android:configChanges="orientation"
             android:exported="true"
-            android:screenOrientation="portrait">
-        </activity>
-
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".MobileApplicationsActivity"
             android:configChanges="orientation"
             android:exported="true"
-            android:screenOrientation="portrait">
-        </activity>
-
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".MainMenuActivity"
             android:configChanges="orientation"
             android:exported="true"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".UserVerificationActivity"
+            android:configChanges="orientation"
+            android:exported="true"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
