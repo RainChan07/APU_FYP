@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">ALMD_AppLockforMobileDevice</string>
+    <string name="master_pin_initial_setup">Master PIN Initial Setup</string>
+</resources>

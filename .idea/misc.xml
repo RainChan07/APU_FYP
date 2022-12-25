@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/rainc/AndroidStudioProjects/testingAndroidDevelopment/app/src/main/res/drawable/ic_launcher_background.xml" value="0.14" />
+        <entry key="..\:/Users/rainc/AndroidStudioProjects/testingAndroidDevelopment/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Users/rainc/AndroidStudioProjects/testingAndroidDevelopment/app/src/main/res/layout/developer_notes.xml" value="0.22" />
+        <entry key="..\:/Users/rainc/AndroidStudioProjects/testingAndroidDevelopment/app/src/main/res/layout/displayed_applications.xml" value="0.25" />
+        <entry key="..\:/Users/rainc/AndroidStudioProjects/testingAndroidDevelopment/app/src/main/res/layout/get_started.xml" value="0.18541666666666667" />
+        <entry key="..\:/Users/rainc/AndroidStudioProjects/testingAndroidDevelopment/app/src/main/res/layout/master_pin_initial_setup.xml" value="0.3625" />
+        <entry key="..\:/Users/rainc/AndroidStudioProjects/testingAndroidDevelopment/app/src/main/res/layout/mobile_applications_selection.xml" value="0.3625" />
+        <entry key="..\:/Users/rainc/AndroidStudioProjects/testingAndroidDevelopment/app/src/main/res/layout/samplePage_backBtn+almdLogo.xml" value="0.3523550724637681" />
+        <entry key="..\:/Users/rainc/AndroidStudioProjects/testingAndroidDevelopment/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.14" />
+        <entry key="..\:/Users/rainc/OneDrive/Documents/Android Studio Projects/ALMD_AppLockforMobileDevice/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2" />
+        <entry key="..\:/Users/rainc/OneDrive/Documents/Android Studio Projects/ALMD_AppLockforMobileDevice/app/src/main/res/drawable/checkbox_background.xml" value="0.3555" />
+        <entry key="..\:/Users/rainc/OneDrive/Documents/Android Studio Projects/ALMD_AppLockforMobileDevice/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2" />
+        <entry key="..\:/Users/rainc/OneDrive/Documents/Android Studio Projects/ALMD_AppLockforMobileDevice/app/src/main/res/layout/developer_notes.xml" value="0.3625" />
+        <entry key="..\:/Users/rainc/OneDrive/Documents/Android Studio Projects/ALMD_AppLockforMobileDevice/app/src/main/res/layout/displayed_applications.xml" value="0.3625" />
+        <entry key="..\:/Users/rainc/OneDrive/Documents/Android Studio Projects/ALMD_AppLockforMobileDevice/app/src/main/res/layout/get_started.xml" value="0.3625" />
+        <entry key="..\:/Users/rainc/OneDrive/Documents/Android Studio Projects/ALMD_AppLockforMobileDevice/app/src/main/res/layout/main_menu.xml" value="0.3625" />
+        <entry key="..\:/Users/rainc/OneDrive/Documents/Android Studio Projects/ALMD_AppLockforMobileDevice/app/src/main/res/layout/master_pin_initial_setup.xml" value="0.3625" />
+        <entry key="..\:/Users/rainc/OneDrive/Documents/Android Studio Projects/ALMD_AppLockforMobileDevice/app/src/main/res/layout/mobile_applications_selection.xml" value="0.3625" />
+        <entry key="..\:/Users/rainc/OneDrive/Documents/Android Studio Projects/ALMD_AppLockforMobileDevice/app/src/main/res/xml/sharedpref.xml" value="0.3569230769230769" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
