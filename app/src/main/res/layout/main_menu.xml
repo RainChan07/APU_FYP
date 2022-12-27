@@ -59,11 +59,11 @@
         app:layout_constraintTop_toBottomOf="@+id/mainMenu_modifyLockedAppsBtn" />
 
     <Switch
-        android:id="@+id/toggleFingerprint"
+        android:id="@+id/toggleBiometrics"
         android:layout_width="251dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Enable Fingerprint Unlock"
+        android:text="Enable Biometrics Unlock"
         android:textColor="#000000"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
