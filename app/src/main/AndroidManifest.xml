@@ -7,6 +7,7 @@
         android:name="android.permission.QUERY_ALL_PACKAGES"
         tools:ignore="QueryAllPackagesPermission" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <queries>
         <intent>
@@ -24,9 +25,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ALMD_AppLockforMobileDevice"
         tools:targetApi="31">
-        <activity
-            android:name=".EnterPINActivity"
-            android:exported="false" />
+
+        <receiver android:name=".AutoStart"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
         <activity
             android:name=".GetStartedActivity"
             android:configChanges="orientation"
@@ -42,17 +48,17 @@
             android:name=".DevNotesActivity"
             android:configChanges="orientation"
             android:exported="true"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".MasterPINActivity"
             android:configChanges="orientation"
             android:exported="true"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".MobileApplicationsActivity"
             android:configChanges="orientation"
             android:exported="true"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".MainMenuActivity"
             android:configChanges="orientation"
@@ -63,6 +69,12 @@
             android:configChanges="orientation"
             android:exported="true"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".EnterPINActivity"
+            android:configChanges="orientation"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <service android:name=".BackgroundServices"/>
     </application>
 
 </manifest>
