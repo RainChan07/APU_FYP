@@ -18,7 +18,6 @@ import java.util.concurrent.Executor
 
 class UserVerificationActivity : AppCompatActivity() {
 
-    private val REQUEST_CODE: Int = 101010
     private lateinit var fingerprintLogin: Button
     private lateinit var masterPinLogin: Button
 
@@ -29,11 +28,13 @@ class UserVerificationActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.user_verification)
+
         val toMainMenuActivity = Intent(this, MainMenuActivity::class.java)
         val toEnterPIN = Intent(this,EnterPINActivity::class.java)
 
         fingerprintLogin = findViewById(R.id.userVerification_fingerprint)
         masterPinLogin = findViewById(R.id.userVerification_PIN)
+
         masterPinLogin.setOnClickListener {
             startActivity(toEnterPIN)
         }
@@ -78,10 +79,6 @@ class UserVerificationActivity : AppCompatActivity() {
             .setSubtitle("Log in using your biometric credential")
             .setNegativeButtonText("Use Master PIN instead")
             .build()
-
-        // Prompt appears when user clicks "Log in".
-        // Consider integrating with the keystore to unlock cryptographic operations,
-        // if needed by your app.
 
         fingerprintLogin.setOnClickListener {
             biometricPrompt.authenticate(promptInfo)

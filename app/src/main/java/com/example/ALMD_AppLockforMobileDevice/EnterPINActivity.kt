@@ -12,12 +12,12 @@ import androidx.appcompat.app.AppCompatActivity
 
 class EnterPINActivity : AppCompatActivity() {
 
-    private lateinit var inpCode1: EditText
-    private lateinit var inpCode2: EditText
-    private lateinit var inpCode3: EditText
-    private lateinit var inpCode4: EditText
-    private lateinit var inpCode5: EditText
-    private lateinit var inpCode6: EditText
+    private lateinit var mPCode1: EditText
+    private lateinit var mPCode2: EditText
+    private lateinit var mPCode3: EditText
+    private lateinit var mPCode4: EditText
+    private lateinit var mPCode5: EditText
+    private lateinit var mPCode6: EditText
 
     private lateinit var masterPin: String
 
@@ -28,116 +28,118 @@ class EnterPINActivity : AppCompatActivity() {
         val sharedPref_masterPin = getSharedPreferences("masterPin", MODE_PRIVATE)
         val master_Pin: String? = sharedPref_masterPin.getString("masterPIN", null)
 
-        inpCode1 = findViewById(R.id.inputCode1)
-        inpCode2 = findViewById(R.id.inputCode2)
-        inpCode3 = findViewById(R.id.inputCode3)
-        inpCode4 = findViewById(R.id.inputCode4)
-        inpCode5 = findViewById(R.id.inputCode5)
-        inpCode6 = findViewById(R.id.inputCode6)
+        mPCode1 = findViewById(R.id.mPCode1)
+        mPCode2 = findViewById(R.id.mPCode2)
+        mPCode3 = findViewById(R.id.mPCode3)
+        mPCode4 = findViewById(R.id.mPCode4)
+        mPCode5 = findViewById(R.id.mPCode5)
+        mPCode6 = findViewById(R.id.mPCode6)
 
         verifyMasterPIN()
 
-        val masterPinInitialSetupNextBtn = findViewById<Button>(R.id.masterPinInitialSetup_nextBtn)
-        masterPinInitialSetupNextBtn.setOnClickListener(View.OnClickListener {
-            if (inpCode1.text.toString().trim().isEmpty() ||
-                inpCode2.text.toString().trim().isEmpty() ||
-                inpCode3.text.toString().trim().isEmpty() ||
-                inpCode4.text.toString().trim().isEmpty() ||
-                inpCode5.text.toString().trim().isEmpty() ||
-                inpCode6.text.toString().trim().isEmpty()
+        val masterPinVerificationNextBtn = findViewById<Button>(R.id.enterPIN_confirmBtn)
+        masterPinVerificationNextBtn.setOnClickListener(View.OnClickListener {
+            if (mPCode1.text.toString().trim().isEmpty() ||
+                mPCode2.text.toString().trim().isEmpty() ||
+                mPCode3.text.toString().trim().isEmpty() ||
+                mPCode4.text.toString().trim().isEmpty() ||
+                mPCode5.text.toString().trim().isEmpty() ||
+                mPCode6.text.toString().trim().isEmpty()
             ) {
-                Toast.makeText(applicationContext, "Please enter valid code", Toast.LENGTH_SHORT)
+                Toast.makeText(applicationContext, "Please enter Master PIN", Toast.LENGTH_SHORT)
                     .show()
                 return@OnClickListener
             }
 
-            masterPin = inpCode1.text.toString() +
-                    inpCode2.text.toString() +
-                    inpCode3.text.toString() +
-                    inpCode4.text.toString() +
-                    inpCode5.text.toString() +
-                    inpCode6.text.toString()
+            masterPin = mPCode1.text.toString() +
+                    mPCode2.text.toString() +
+                    mPCode3.text.toString() +
+                    mPCode4.text.toString() +
+                    mPCode5.text.toString() +
+                    mPCode6.text.toString()
 
             if (masterPin == master_Pin) {
                 Toast.makeText(applicationContext, "User Verified", Toast.LENGTH_SHORT).show()
                 val toMainMenuActivity = Intent(this, MainMenuActivity::class.java)
                 startActivity(toMainMenuActivity)
+            } else {
+                Toast.makeText(applicationContext, "Incorrect Master PIN", Toast.LENGTH_SHORT).show()
             }
         })
     }
 
     private fun verifyMasterPIN() {
-        inpCode1.addTextChangedListener(object : TextWatcher {
+        mPCode1.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 if (!s.toString().trim().isEmpty()) {
-                    inpCode2.requestFocus()
+                    mPCode2.requestFocus()
                 }
             }
 
             override fun afterTextChanged(s: Editable?) {}
         })
-        inpCode2.addTextChangedListener(object : TextWatcher {
+        mPCode2.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 if (!s.toString().trim().isEmpty()) {
-                    inpCode3.requestFocus()
+                    mPCode3.requestFocus()
                 } else {
-                    inpCode1.requestFocus()
+                    mPCode1.requestFocus()
                 }
             }
 
             override fun afterTextChanged(s: Editable?) {}
         })
-        inpCode3.addTextChangedListener(object : TextWatcher {
+        mPCode3.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 if (!s.toString().trim().isEmpty()) {
-                    inpCode4.requestFocus()
+                    mPCode4.requestFocus()
                 } else {
-                    inpCode2.requestFocus()
+                    mPCode2.requestFocus()
                 }
             }
 
             override fun afterTextChanged(s: Editable?) {}
         })
-        inpCode4.addTextChangedListener(object : TextWatcher {
+        mPCode4.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 if (!s.toString().trim().isEmpty()) {
-                    inpCode5.requestFocus()
+                    mPCode5.requestFocus()
                 } else {
-                    inpCode3.requestFocus()
+                    mPCode3.requestFocus()
                 }
             }
 
             override fun afterTextChanged(s: Editable?) {}
         })
-        inpCode5.addTextChangedListener(object : TextWatcher {
+        mPCode5.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 if (!s.toString().trim().isEmpty()) {
-                    inpCode6.requestFocus()
+                    mPCode6.requestFocus()
                 } else {
-                    inpCode4.requestFocus()
+                    mPCode4.requestFocus()
                 }
             }
 
             override fun afterTextChanged(s: Editable?) {}
         })
-        inpCode6.addTextChangedListener(object : TextWatcher {
+        mPCode6.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 if (!s.toString().trim().isEmpty()) {
 
                 } else {
-                    inpCode5.requestFocus()
+                    mPCode5.requestFocus()
                 }
             }
 

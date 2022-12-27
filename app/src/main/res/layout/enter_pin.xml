@@ -62,7 +62,7 @@
         app:layout_constraintVertical_bias="0.287">
 
         <EditText
-            android:id="@+id/inputCode1"
+            android:id="@+id/mPCode1"
             android:layout_width="40dp"
             android:layout_height="50dp"
             android:gravity="center"
@@ -75,21 +75,7 @@
             tools:ignore="LabelFor" />
 
         <EditText
-            android:id="@+id/inputCode2"
-            android:layout_width="40dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="4dp"
-            android:gravity="center"
-            android:imeOptions="actionNext"
-            android:importantForAutofill="no"
-            android:inputType="number"
-            android:maxLength="1"
-            android:textSize="24sp"
-            android:textColor="#000000"
-            tools:ignore="LabelFor" />
-
-        <EditText
-            android:id="@+id/inputCode3"
+            android:id="@+id/mPCode2"
             android:layout_width="40dp"
             android:layout_height="50dp"
             android:layout_marginStart="4dp"
@@ -103,7 +89,7 @@
             tools:ignore="LabelFor" />
 
         <EditText
-            android:id="@+id/inputCode4"
+            android:id="@+id/mPCode3"
             android:layout_width="40dp"
             android:layout_height="50dp"
             android:layout_marginStart="4dp"
@@ -117,7 +103,7 @@
             tools:ignore="LabelFor" />
 
         <EditText
-            android:id="@+id/inputCode5"
+            android:id="@+id/mPCode4"
             android:layout_width="40dp"
             android:layout_height="50dp"
             android:layout_marginStart="4dp"
@@ -131,7 +117,21 @@
             tools:ignore="LabelFor" />
 
         <EditText
-            android:id="@+id/inputCode6"
+            android:id="@+id/mPCode5"
+            android:layout_width="40dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="4dp"
+            android:gravity="center"
+            android:imeOptions="actionNext"
+            android:importantForAutofill="no"
+            android:inputType="number"
+            android:maxLength="1"
+            android:textSize="24sp"
+            android:textColor="#000000"
+            tools:ignore="LabelFor" />
+
+        <EditText
+            android:id="@+id/mPCode6"
             android:layout_width="40dp"
             android:layout_height="50dp"
             android:layout_marginStart="4dp"
