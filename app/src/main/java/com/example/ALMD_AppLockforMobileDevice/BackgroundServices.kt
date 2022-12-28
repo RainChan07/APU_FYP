@@ -1,48 +1,42 @@
 package com.example.ALMD_AppLockforMobileDevice
 
 import android.app.ActivityManager
-import android.app.IntentService
 import android.app.Service
+import android.content.ComponentName
+import android.content.Context
 import android.content.Intent
-import android.content.pm.ApplicationInfo
-import android.content.pm.PackageManager
-import android.content.pm.ResolveInfo
-import android.graphics.drawable.Drawable
 import android.os.IBinder
+import android.util.Log
+import androidx.core.content.ContextCompat.getSystemService
 import java.util.*
+
 
 class BackgroundServices : Service(){
 
-    override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int{
-        val packageManager = packageManager
-        val mainIntent = Intent(Intent.ACTION_MAIN, null)
-        mainIntent.addCategory(Intent.CATEGORY_LAUNCHER)
+    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int{
 
         val sharedPref_lockedAppsList = getSharedPreferences("lockedAppsList", MODE_PRIVATE)
         val lockedAppsList: MutableSet<String>? = sharedPref_lockedAppsList.getStringSet("lockedAppsList", null)
+        val arrayLockedAppsList: ArrayList<String> = ArrayList(lockedAppsList!!)
 
-        val pm: PackageManager = packageManager
-        val allApps: MutableList<String> = ArrayList()
-        val packs: List<ResolveInfo> = pm.queryIntentActivities(intent, PackageManager.GET_META_DATA)
+//        val am = getSystemService(IntentService.ACTIVITY_SERVICE) as ActivityManager
+//        val rt = am.getRunningTasks(1)
+//        val ar = rt[0]
+//        val activityOnTop = ar.topActivity!!.className
 
-        for (i in packs.indices) {
-            val r: ResolveInfo = packs[i]
-            r.activityInfo.applicationInfo.flags and ApplicationInfo.FLAG_SYSTEM != 0
-            allApps.add(r.loadLabel(packageManager).toString())
+//        val mActivityManager = this.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+//        val mPackageName = mActivityManager.runningAppProcesses[0].processName
+
+        val am = this.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+        val cn: ComponentName? = am.getRunningTasks(1).get(0).topActivity
+
+        for (i in lockedAppsList.indices) {
+            Log.d("Application Name:", cn.toString())
+            if (cn.toString() == arrayLockedAppsList[i]) {
+                val toUserVerification = Intent(this, UserVerificationActivity::class.java)
+                startActivity(toUserVerification)
+            }
         }
-
-        val sortedApps = allApps.sort()
-
-        val am = getSystemService(IntentService.ACTIVITY_SERVICE) as ActivityManager
-        val rt = am.getRunningTasks(1)
-        val ar = rt[0]
-        var activityOnTop = ar.topActivity!!.className
-
-//        for (i in lockedAppsList!!.indices) {
-//            if (activityOnTop == lockedAppsList[i]) {
-//
-//            }
-//        }
 
 //        val lockIntent = Intent(mContext, LockScreen::class.java)
 //        lockIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
