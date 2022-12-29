@@ -1,4 +1,4 @@
-package com.example.ALMD_AppLockforMobileDevice
+package com.example.ALMD_AppLockforMobileDevice.AppLockApplication
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity

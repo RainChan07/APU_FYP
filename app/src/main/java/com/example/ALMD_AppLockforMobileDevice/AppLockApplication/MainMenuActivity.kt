@@ -1,10 +1,10 @@
-package com.example.ALMD_AppLockforMobileDevice
+package com.example.ALMD_AppLockforMobileDevice.AppLockApplication
 
 import android.content.Intent
 import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.biometric.BiometricManager
+import com.example.ALMD_AppLockforMobileDevice.R
 
 class MainMenuActivity : AppCompatActivity() {
 

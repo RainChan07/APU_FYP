@@ -7,7 +7,9 @@
         android:name="android.permission.QUERY_ALL_PACKAGES"
         tools:ignore="QueryAllPackagesPermission" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.GET_TASKS"/>
     <uses-permission android:name="android.permission.REAL_GET_TASKS"
         tools:ignore="ProtectedPermissions" />
     <uses-permission
@@ -30,16 +32,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ALMD_AppLockforMobileDevice"
         tools:targetApi="31">
-
-        <receiver android:name=".AutoStart"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-            </intent-filter>
-        </receiver>
-
         <activity
-            android:name=".GetStartedActivity"
+            android:name=".AppLockApplication.GetStartedActivity"
             android:configChanges="orientation"
             android:exported="true"
             android:screenOrientation="portrait">
@@ -50,36 +44,45 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".DevNotesActivity"
+            android:name=".AppLockApplication.DevNotesActivity"
             android:configChanges="orientation"
             android:exported="true"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".MasterPINActivity"
+            android:name=".AppLockApplication.MasterPINActivity"
             android:configChanges="orientation"
             android:exported="true"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".MobileApplicationsActivity"
+            android:name=".AppLockApplication.MobileApplicationsActivity"
             android:configChanges="orientation"
             android:exported="true"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".MainMenuActivity"
+            android:name=".AppLockApplication.MainMenuActivity"
             android:configChanges="orientation"
             android:exported="true"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".UserVerificationActivity"
+            android:name=".Security.UserVerificationActivity"
             android:configChanges="orientation"
             android:exported="true"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".EnterPINActivity"
+            android:name=".Security.EnterPINActivity"
             android:configChanges="orientation"
             android:exported="true"
             android:screenOrientation="portrait" />
-        <service android:name=".BackgroundServices"/>
+        <service
+            android:name=".Services.ForegroundServices"
+            android:enabled="true"
+            android:exported="true" />
+        <receiver android:name=".Services.AutoStart"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

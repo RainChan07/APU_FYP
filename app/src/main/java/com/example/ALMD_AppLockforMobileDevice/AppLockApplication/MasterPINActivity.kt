@@ -1,4 +1,4 @@
-package com.example.ALMD_AppLockforMobileDevice
+package com.example.ALMD_AppLockforMobileDevice.AppLockApplication
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.ALMD_AppLockforMobileDevice.R
 
 class MasterPINActivity : AppCompatActivity() {
 
@@ -44,7 +45,7 @@ class MasterPINActivity : AppCompatActivity() {
         val masterPinInitialSetupBackBtn = findViewById<Button>(R.id.masterPinInitialSetup_backBtn)
         masterPinInitialSetupBackBtn.setOnClickListener {
             if ((master_Pin != null) && (lockedAppsList != null)) {
-                val toMainMenu = Intent(this,MainMenuActivity::class.java)
+                val toMainMenu = Intent(this, MainMenuActivity::class.java)
                 startActivity(toMainMenu)
             } else {
                 val toDevNotes = Intent(this, DevNotesActivity::class.java)
@@ -80,7 +81,7 @@ class MasterPINActivity : AppCompatActivity() {
 
             if ((master_Pin != null) && (lockedAppsList != null))
             {
-                val toMainMenu = Intent(this,MainMenuActivity::class.java)
+                val toMainMenu = Intent(this, MainMenuActivity::class.java)
                 startActivity(toMainMenu)
             } else {
                 val toMobileApplicationsSelection = Intent(this, MobileApplicationsActivity::class.java)

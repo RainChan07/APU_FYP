@@ -1,4 +1,4 @@
-package com.example.ALMD_AppLockforMobileDevice
+package com.example.ALMD_AppLockforMobileDevice.Security
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,6 +9,8 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.ALMD_AppLockforMobileDevice.AppLockApplication.MainMenuActivity
+import com.example.ALMD_AppLockforMobileDevice.R
 
 class EnterPINActivity : AppCompatActivity() {
 

@@ -1,4 +1,4 @@
-package com.example.ALMD_AppLockforMobileDevice
+package com.example.ALMD_AppLockforMobileDevice.AppLockApplication
 
 import android.content.Context
 import android.content.Intent
@@ -12,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import com.example.ALMD_AppLockforMobileDevice.R
 
 
 class MobileApplicationsActivity : AppCompatActivity() {

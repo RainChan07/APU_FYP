@@ -1,12 +1,10 @@
-package com.example.ALMD_AppLockforMobileDevice
+package com.example.ALMD_AppLockforMobileDevice.Security
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.Settings
 import android.util.Log
 import android.widget.Button
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricManager.Authenticators.BIOMETRIC_STRONG
@@ -14,6 +12,8 @@ import androidx.biometric.BiometricManager.Authenticators.DEVICE_CREDENTIAL
 import androidx.biometric.BiometricPrompt
 import androidx.constraintlayout.widget.ConstraintLayoutStates.TAG
 import androidx.core.content.ContextCompat
+import com.example.ALMD_AppLockforMobileDevice.AppLockApplication.MainMenuActivity
+import com.example.ALMD_AppLockforMobileDevice.R
 import java.util.concurrent.Executor
 
 class UserVerificationActivity : AppCompatActivity() {
@@ -30,7 +30,7 @@ class UserVerificationActivity : AppCompatActivity() {
         setContentView(R.layout.user_verification)
 
         val toMainMenuActivity = Intent(this, MainMenuActivity::class.java)
-        val toEnterPIN = Intent(this,EnterPINActivity::class.java)
+        val toEnterPIN = Intent(this, EnterPINActivity::class.java)
 
         fingerprintLogin = findViewById(R.id.userVerification_fingerprint)
         masterPinLogin = findViewById(R.id.userVerification_PIN)
