@@ -7,7 +7,6 @@
         android:name="android.permission.QUERY_ALL_PACKAGES"
         tools:ignore="QueryAllPackagesPermission" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.GET_TASKS"/>
     <uses-permission android:name="android.permission.REAL_GET_TASKS"
@@ -74,9 +73,14 @@
             android:exported="true"
             android:screenOrientation="portrait" />
         <service
-            android:name=".Services.ForegroundServices"
-            android:enabled="true"
-            android:exported="true" />
+            android:name=".Services.AccessibilitySvc"
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessibilityService"/>
+            </intent-filter>
+        </service>
+
         <receiver android:name=".Services.AutoStart"
             android:exported="true">
             <intent-filter>

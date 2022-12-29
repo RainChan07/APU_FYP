@@ -1,6 +1,5 @@
 package com.example.ALMD_AppLockforMobileDevice.AppLockApplication
 
-import android.app.ActivityManager
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -9,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.ALMD_AppLockforMobileDevice.R
 import com.example.ALMD_AppLockforMobileDevice.Security.EnterPINActivity
 import com.example.ALMD_AppLockforMobileDevice.Security.UserVerificationActivity
-import com.example.ALMD_AppLockforMobileDevice.Services.ForegroundServices
+import com.example.ALMD_AppLockforMobileDevice.Services.AccessibilitySvc
 
 
 class GetStartedActivity : AppCompatActivity() {
@@ -17,20 +16,13 @@ class GetStartedActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.get_started)
 
-//        startService(Intent(applicationContext, BackgroundServices::class.java))
-
-        if (!foregroundServiceRunning()) {
-            val foregroundServiceIntent = Intent(this, ForegroundServices::class.java)
-            startForegroundService(foregroundServiceIntent)
-
-            Toast.makeText(applicationContext, "service is running", Toast.LENGTH_SHORT).show()
-        }
+        runAccessibilityService()
 
         val sharedPref_masterPin = getSharedPreferences("masterPin", MODE_PRIVATE)
         val master_Pin: String? = sharedPref_masterPin.getString("masterPIN", null)
 
         val sharedPref_toggleBiometrics = getSharedPreferences("allowBiometrics", MODE_PRIVATE)
-        val onOrOff: Boolean = sharedPref_toggleBiometrics.getBoolean("onOrOff", true)
+        val onOrOff: Boolean = sharedPref_toggleBiometrics.getBoolean("onOrOff", false)
 
         if (master_Pin != null && onOrOff) {
             val toUserVerification = Intent(this, UserVerificationActivity::class.java)
@@ -47,13 +39,10 @@ class GetStartedActivity : AppCompatActivity() {
         }
     }
 
-    fun foregroundServiceRunning(): Boolean {
-        val activityManager = getSystemService(ACTIVITY_SERVICE) as ActivityManager
-        for (service in activityManager.getRunningServices(Int.MAX_VALUE)) {
-            if (ForegroundServices::class.java.getName() == service.service.className) {
-                return true
-            }
-        }
-        return false
+    fun runAccessibilityService() {
+        val runAccessibilitySvc = Intent(this, AccessibilitySvc::class.java)
+        startService(runAccessibilitySvc)
+
+        Toast.makeText(applicationContext, "Accessibility service is running", Toast.LENGTH_SHORT).show()
     }
 }

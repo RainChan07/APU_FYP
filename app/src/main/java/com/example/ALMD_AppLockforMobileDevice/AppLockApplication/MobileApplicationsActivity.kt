@@ -1,5 +1,6 @@
 package com.example.ALMD_AppLockforMobileDevice.AppLockApplication
 
+import android.app.Application
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ApplicationInfo
@@ -40,7 +41,7 @@ class MobileApplicationsActivity : AppCompatActivity() {
 
         val mobileApplicationsSelectionBackBtn = findViewById<Button>(R.id.mobileApplicationsSelection_backBtn)
         mobileApplicationsSelectionBackBtn.setOnClickListener {
-            if ((master_Pin != null) && (lockedAppsList != null)) {
+            if ((master_Pin != null) && (lockedApps_List != null)) {
                 val toMainMenuActivity = Intent(this, MainMenuActivity::class.java)
                 startActivity(toMainMenuActivity)
             } else {
@@ -54,7 +55,7 @@ class MobileApplicationsActivity : AppCompatActivity() {
             editor_lockedAppsList.putStringSet("lockedAppsList", lockedAppsList.toSet())
             editor_lockedAppsList.apply()
 
-            if ((master_Pin != null) && (lockedAppsList != null)) {
+            if ((master_Pin != null) && (lockedApps_List != null)) {
                 val toMainMenuActivity = Intent(this, MainMenuActivity::class.java)
                 startActivity(toMainMenuActivity)
             } else {
@@ -93,7 +94,8 @@ class MobileApplicationsActivity : AppCompatActivity() {
             } else {
                 val appName: String = r.loadLabel(packageManager).toString()
                 val icon: Drawable = r.loadIcon(packageManager)
-                apps.add(AppList(appName, icon))
+                val pkgName: String = r.activityInfo.packageName.toString()
+                apps.add(AppList(appName, icon, pkgName))
             }
         }
         return apps.sortedWith(compareBy { it.getName() })
@@ -130,6 +132,7 @@ class MobileApplicationsActivity : AppCompatActivity() {
                 convertView = layoutInflater.inflate(R.layout.displayed_applications, parent, false)
                 viewHolder.textInListView = convertView.findViewById(R.id.list_app_name) as TextView
                 viewHolder.imageInListView = convertView.findViewById(R.id.app_icon) as ImageView
+                viewHolder.pkgNameInListView = convertView.findViewById(R.id.list_pkg_name) as TextView
                 viewHolder.checkBoxInListView = convertView.findViewById(R.id.toggleLock) as CheckBox
                 convertView.tag = viewHolder // For scrolling
             } else {
@@ -143,14 +146,15 @@ class MobileApplicationsActivity : AppCompatActivity() {
                 val isChecked: Boolean = viewHolder.checkBoxInListView!!.isChecked
                 checkedState[position] = isChecked
                 if (isChecked) {
-                    lockedAppsList.add(viewHolder.textInListView!!.text as String)
+                    lockedAppsList.add(viewHolder.pkgNameInListView!!.text as String)
                 } else {
-                    lockedAppsList.remove(viewHolder.textInListView!!.text as String)
+                    lockedAppsList.remove(viewHolder.pkgNameInListView!!.text as String)
                 }
             }
 
             viewHolder.textInListView!!.text = listStorage!![position].getName()
             viewHolder.imageInListView!!.setImageDrawable(listStorage!![position].getIcon())
+            viewHolder.pkgNameInListView!!.text = listStorage!![position].getPkgName()
 //            viewHolder.checkBoxInListView!!.isChecked = listStorage!![position].isSelected()!! // Kept crashing
             return convertView!!
         }
@@ -159,10 +163,11 @@ class MobileApplicationsActivity : AppCompatActivity() {
             var textInListView: TextView? = null
             var imageInListView: ImageView? = null
             var checkBoxInListView: CheckBox? = null
+            var pkgNameInListView: TextView? = null
         }
     }
 
-    inner class AppList(private var name: String, icon: Drawable) {
+    inner class AppList(private var name: String, icon: Drawable, private var pkgName: String) {
     var icon: Drawable
     private var selected: Boolean? = null
 
@@ -173,6 +178,10 @@ class MobileApplicationsActivity : AppCompatActivity() {
 
         fun getName(): String {
             return name
+        }
+
+        fun getPkgName(): String {
+            return pkgName
         }
 
         @JvmName("getIcon1")

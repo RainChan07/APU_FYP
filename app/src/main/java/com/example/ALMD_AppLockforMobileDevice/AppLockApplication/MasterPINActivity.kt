@@ -44,7 +44,7 @@ class MasterPINActivity : AppCompatActivity() {
 
         val masterPinInitialSetupBackBtn = findViewById<Button>(R.id.masterPinInitialSetup_backBtn)
         masterPinInitialSetupBackBtn.setOnClickListener {
-            if ((master_Pin != null) && (lockedAppsList != null)) {
+            if (master_Pin != null) {
                 val toMainMenu = Intent(this, MainMenuActivity::class.java)
                 startActivity(toMainMenu)
             } else {

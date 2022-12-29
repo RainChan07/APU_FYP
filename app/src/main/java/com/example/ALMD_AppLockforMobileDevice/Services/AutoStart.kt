@@ -7,8 +7,8 @@ import android.content.Intent
 class AutoStart : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
         if (intent.action == Intent.ACTION_BOOT_COMPLETED) {
-            val serviceIntent = Intent(context, ForegroundServices::class.java)
-            context.startForegroundService(serviceIntent)
+            val serviceIntent = Intent(context, AccessibilitySvc::class.java)
+            context.startService(serviceIntent)
         }
     }
 }
