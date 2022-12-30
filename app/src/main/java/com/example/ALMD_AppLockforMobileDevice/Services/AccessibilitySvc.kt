@@ -2,15 +2,11 @@ package com.example.ALMD_AppLockforMobileDevice.Services
 
 import android.accessibilityservice.AccessibilityService
 import android.accessibilityservice.AccessibilityServiceInfo
-import android.content.ComponentName
 import android.content.Intent
-import android.content.pm.ActivityInfo
-import android.content.pm.PackageManager
+import android.os.Handler
 import android.util.Log
 import android.view.accessibility.AccessibilityEvent
-import com.example.ALMD_AppLockforMobileDevice.Security.EnterPINActivity
-import com.example.ALMD_AppLockforMobileDevice.Security.UserVerificationActivity
-import java.lang.Exception
+import android.widget.Toast
 
 
 @Suppress("DEPRECATED_IDENTITY_EQUALS")
@@ -31,39 +27,30 @@ class AccessibilitySvc : AccessibilityService() {
             val sharedPref_lockedAppsList = getSharedPreferences("lockedAppsList", MODE_PRIVATE)
             val lockedAppsList: MutableSet<String>? = sharedPref_lockedAppsList.getStringSet("lockedAppsList", null)
             val arrayLockedAppsList: ArrayList<String> = ArrayList(lockedAppsList!!)
-            val sharedPref_toggleBiometrics = getSharedPreferences("allowBiometrics", MODE_PRIVATE)
-            val onOrOff: Boolean = sharedPref_toggleBiometrics.getBoolean("onOrOff", true)
+
+            val sharedPref_unlockingApp = getSharedPreferences("unlockingApp", MODE_PRIVATE)
+            val editor_unlockingApp = sharedPref_unlockingApp.edit()
+            val unlockingApp: String? = sharedPref_unlockingApp.getString("unlockingApp", null)
 
             val pkgName: String = accessibilityEvent.packageName.toString()
             Log.d("Package Name", pkgName)
             if (accessibilityEvent.eventType == AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED) {
                 if (accessibilityEvent.packageName != null && accessibilityEvent.className != null) {
-                    val componentName = ComponentName(accessibilityEvent.packageName.toString(), accessibilityEvent.className.toString())
-                    val activityInfo = tryGetActivity(componentName)
-                    val isActivity = activityInfo != null
-                    if (isActivity) Log.i("CurrentActivity", componentName.flattenToShortString())
-
+                    if (unlockingApp != null) {
+                        editor_unlockingApp.clear()
+                    }
                     for (i in arrayLockedAppsList.indices) {
-                        if ((pkgName == arrayLockedAppsList[i]) && onOrOff) {
-                            val toUserVerification = Intent(this, UserVerificationActivity::class.java)
-                            startActivity(toUserVerification)
-                        } else if ((pkgName == arrayLockedAppsList[i]) && !onOrOff) {
-                            val toEnterPin = Intent(this, EnterPINActivity::class.java)
-                            startActivity(toEnterPin)
+                        if (pkgName == arrayLockedAppsList[i]) {
+                            editor_unlockingApp.putString("unlockingApp", pkgName)
+                            editor_unlockingApp.apply()
+                            val launchALMDSecurity = packageManager.getLaunchIntentForPackage("com.example.ALMD_AppLockforMobileDevice")
+                            startActivity(launchALMDSecurity)
                         }
                     }
                 }
             }
         } catch (e: Exception) {
             Log.d("Locked Apps List", "equals to null")
-        }
-    }
-
-    private fun tryGetActivity(componentName: ComponentName): ActivityInfo? {
-        return try {
-            packageManager.getActivityInfo(componentName, 0)
-        } catch (e: PackageManager.NameNotFoundException) {
-            null
         }
     }
 

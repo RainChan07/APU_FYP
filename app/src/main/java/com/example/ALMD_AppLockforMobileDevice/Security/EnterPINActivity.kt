@@ -30,6 +30,9 @@ class EnterPINActivity : AppCompatActivity() {
         val sharedPref_masterPin = getSharedPreferences("masterPin", MODE_PRIVATE)
         val master_Pin: String? = sharedPref_masterPin.getString("masterPIN", null)
 
+        val sharedPref_unlockingApp = getSharedPreferences("unlockingApp", MODE_PRIVATE)
+        val unlockingApp: String? = sharedPref_unlockingApp.getString("unlockingApp", null)
+
         mPCode1 = findViewById(R.id.mPCode1)
         mPCode2 = findViewById(R.id.mPCode2)
         mPCode3 = findViewById(R.id.mPCode3)
@@ -62,6 +65,11 @@ class EnterPINActivity : AppCompatActivity() {
 
             if (masterPin == master_Pin) {
                 Toast.makeText(applicationContext, "User Verified", Toast.LENGTH_SHORT).show()
+
+                if (unlockingApp != null) {
+                    val launchLockedApp = packageManager.getLaunchIntentForPackage(unlockingApp)
+                    startActivity(launchLockedApp)
+                }
                 val toMainMenuActivity = Intent(this, MainMenuActivity::class.java)
                 startActivity(toMainMenuActivity)
             } else {
