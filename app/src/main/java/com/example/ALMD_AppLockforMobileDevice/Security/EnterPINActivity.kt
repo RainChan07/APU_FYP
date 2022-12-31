@@ -75,6 +75,7 @@ class EnterPINActivity : AppCompatActivity() {
                     editor_AU.apply()
                     val launchLockedApp = packageManager.getLaunchIntentForPackage(unlockingApp)
                     startActivity(launchLockedApp)
+                    finish() // Prevent back access to retrieve PIN code
                 } else {
                     val toMainMenuActivity = Intent(this, MainMenuActivity::class.java)
                     startActivity(toMainMenuActivity)
