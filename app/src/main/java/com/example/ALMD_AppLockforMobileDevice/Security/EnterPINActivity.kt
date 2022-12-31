@@ -31,7 +31,12 @@ class EnterPINActivity : AppCompatActivity() {
         val master_Pin: String? = sharedPref_masterPin.getString("masterPIN", null)
 
         val sharedPref_unlockingApp = getSharedPreferences("unlockingApp", MODE_PRIVATE)
+        val editor_unlockingApp = sharedPref_unlockingApp.edit()
         val unlockingApp: String? = sharedPref_unlockingApp.getString("unlockingApp", null)
+
+        val sharedPref_AU = getSharedPreferences("afterUnlock", MODE_PRIVATE)
+        val editor_AU = sharedPref_AU.edit()
+        val afterUnlock: String? = sharedPref_AU.getString("afterUnlock", null)
 
         mPCode1 = findViewById(R.id.mPCode1)
         mPCode2 = findViewById(R.id.mPCode2)
@@ -65,13 +70,18 @@ class EnterPINActivity : AppCompatActivity() {
 
             if (masterPin == master_Pin) {
                 Toast.makeText(applicationContext, "User Verified", Toast.LENGTH_SHORT).show()
-
                 if (unlockingApp != null) {
-                    val launchLockedApp = packageManager.getLaunchIntentForPackage(unlockingApp)
+                    val appName: String = unlockingApp
+                    editor_unlockingApp.clear()
+                    editor_unlockingApp.apply()
+                    editor_AU.putString("afterUnlock", "1")
+                    editor_AU.apply()
+                    val launchLockedApp = packageManager.getLaunchIntentForPackage(appName)
                     startActivity(launchLockedApp)
+                } else {
+                    val toMainMenuActivity = Intent(this, MainMenuActivity::class.java)
+                    startActivity(toMainMenuActivity)
                 }
-                val toMainMenuActivity = Intent(this, MainMenuActivity::class.java)
-                startActivity(toMainMenuActivity)
             } else {
                 Toast.makeText(applicationContext, "Incorrect Master PIN", Toast.LENGTH_SHORT).show()
             }
