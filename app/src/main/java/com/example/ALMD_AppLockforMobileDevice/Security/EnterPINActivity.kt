@@ -71,12 +71,9 @@ class EnterPINActivity : AppCompatActivity() {
             if (masterPin == master_Pin) {
                 Toast.makeText(applicationContext, "User Verified", Toast.LENGTH_SHORT).show()
                 if (unlockingApp != null) {
-                    val appName: String = unlockingApp
-                    editor_unlockingApp.clear()
-                    editor_unlockingApp.apply()
                     editor_AU.putString("afterUnlock", "1")
                     editor_AU.apply()
-                    val launchLockedApp = packageManager.getLaunchIntentForPackage(appName)
+                    val launchLockedApp = packageManager.getLaunchIntentForPackage(unlockingApp)
                     startActivity(launchLockedApp)
                 } else {
                     val toMainMenuActivity = Intent(this, MainMenuActivity::class.java)

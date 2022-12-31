@@ -39,7 +39,7 @@ class AccessibilitySvc : AccessibilityService() {
         val unlockingApp: String? = sharedPref_unlockingApp.getString("unlockingApp", null)
 
         val newApp: String = accessibilityEvent.packageName.toString()
-        if (newApp != unlockingApp) {
+        if ((newApp != unlockingApp) && (unlockingApp != "com.example.ALMD_AppLockforMobileDevice")) {
             editor_AU.clear()
             editor_AU.apply()
         }
@@ -54,6 +54,8 @@ class AccessibilitySvc : AccessibilityService() {
                     if (accessibilityEvent.packageName != null && accessibilityEvent.className != null) {
                         for (i in arrayLockedAppsList.indices) {
                             if (pkgName == arrayLockedAppsList[i]) {
+                                editor_unlockingApp.clear()
+                                editor_unlockingApp.apply()
                                 editor_unlockingApp.putString("unlockingApp", pkgName)
                                 editor_unlockingApp.apply()
                                 val launchALMDSecurity = packageManager.getLaunchIntentForPackage("com.example.ALMD_AppLockforMobileDevice")
