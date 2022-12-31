@@ -29,6 +29,14 @@ class UserVerificationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.user_verification)
 
+        val sharedPref_unlockingApp = getSharedPreferences("unlockingApp", MODE_PRIVATE)
+        val editor_unlockingApp = sharedPref_unlockingApp.edit()
+        val unlockingApp: String? = sharedPref_unlockingApp.getString("unlockingApp", null)
+
+        val sharedPref_AU = getSharedPreferences("afterUnlock", MODE_PRIVATE)
+        val editor_AU = sharedPref_AU.edit()
+        val afterUnlock: String? = sharedPref_AU.getString("afterUnlock", null)
+
         val toMainMenuActivity = Intent(this, MainMenuActivity::class.java)
         val toEnterPIN = Intent(this, EnterPINActivity::class.java)
 
@@ -65,7 +73,14 @@ class UserVerificationActivity : AppCompatActivity() {
             override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
                 super.onAuthenticationSucceeded(result)
                 Toast.makeText(applicationContext, "Authentication succeeded", Toast.LENGTH_SHORT).show()
-                startActivity(toMainMenuActivity)
+                if (unlockingApp != null) {
+                    editor_AU.putString("afterUnlock", "1")
+                    editor_AU.apply()
+                    val launchLockedApp = packageManager.getLaunchIntentForPackage(unlockingApp)
+                    startActivity(launchLockedApp)
+                } else {
+                    startActivity(toMainMenuActivity)
+                }
             }
 
             override fun onAuthenticationFailed() {
