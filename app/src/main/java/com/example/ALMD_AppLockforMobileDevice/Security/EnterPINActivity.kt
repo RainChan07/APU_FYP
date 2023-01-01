@@ -31,12 +31,10 @@ class EnterPINActivity : AppCompatActivity() {
         val master_Pin: String? = sharedPref_masterPin.getString("masterPIN", null)
 
         val sharedPref_unlockingApp = getSharedPreferences("unlockingApp", MODE_PRIVATE)
-        val editor_unlockingApp = sharedPref_unlockingApp.edit()
         val unlockingApp: String? = sharedPref_unlockingApp.getString("unlockingApp", null)
 
         val sharedPref_AU = getSharedPreferences("afterUnlock", MODE_PRIVATE)
         val editor_AU = sharedPref_AU.edit()
-        val afterUnlock: String? = sharedPref_AU.getString("afterUnlock", null)
 
         val sharedPref_locked = getSharedPreferences("locked", MODE_PRIVATE)
         val editor_locked = sharedPref_locked.edit()

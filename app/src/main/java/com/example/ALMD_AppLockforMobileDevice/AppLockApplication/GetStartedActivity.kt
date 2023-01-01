@@ -3,7 +3,6 @@ package com.example.ALMD_AppLockforMobileDevice.AppLockApplication
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.ALMD_AppLockforMobileDevice.R
 import com.example.ALMD_AppLockforMobileDevice.Security.EnterPINActivity
@@ -42,7 +41,5 @@ class GetStartedActivity : AppCompatActivity() {
     fun runAccessibilityService() {
         val runAccessibilitySvc = Intent(this, AccessibilitySvc::class.java)
         startService(runAccessibilitySvc)
-
-        Toast.makeText(applicationContext, "Accessibility service is running", Toast.LENGTH_SHORT).show()
     }
 }

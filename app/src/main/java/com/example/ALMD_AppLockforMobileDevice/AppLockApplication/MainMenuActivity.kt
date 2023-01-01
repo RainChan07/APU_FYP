@@ -16,8 +16,6 @@ class MainMenuActivity : AppCompatActivity() {
 
         val toggleBiometrics: Switch = findViewById(R.id.toggleBiometrics)
 
-        val togglePreventUninstallation: Switch = findViewById(R.id.togglePreventUninstallation)
-
         val sharedPref_lockedAppsList = getSharedPreferences("lockedAppsList", MODE_PRIVATE)
         val editor_lockedAppsList = sharedPref_lockedAppsList.edit()
 
@@ -25,12 +23,7 @@ class MainMenuActivity : AppCompatActivity() {
         val editor_toggleBiometrics = sharedPref_toggleBiometrics.edit()
         val switchBiometrics: Boolean = sharedPref_toggleBiometrics.getBoolean("switchBiometrics", false)
 
-        val sharedPref_togglePreventUninstallation = getSharedPreferences("allowPreventUninstallation", MODE_PRIVATE)
-        val editor_togglePreventUninstallation = sharedPref_togglePreventUninstallation.edit()
-        val switchPreventUninstallation: Boolean = sharedPref_togglePreventUninstallation.getBoolean("switchPreventUninstallation", false)
-
         toggleBiometrics.isChecked = switchBiometrics
-        togglePreventUninstallation.isChecked = switchPreventUninstallation
 
         toggleBiometrics.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
@@ -41,20 +34,6 @@ class MainMenuActivity : AppCompatActivity() {
                 editor_toggleBiometrics.putBoolean("switchBiometrics", false)
                 editor_toggleBiometrics.apply()
                 toggleBiometrics.isChecked = false
-            }
-        }
-
-        togglePreventUninstallation.setOnCheckedChangeListener { buttonView, isChecked ->
-            if (isChecked) {
-                editor_togglePreventUninstallation.putBoolean("switchPreventUninstallation", true)
-                editor_togglePreventUninstallation.apply()
-                setUninstallBlocked(null, "com.example.ALMD_AppLockforMobileDevice", switchPreventUninstallation)
-                togglePreventUninstallation.isChecked = true
-            } else {
-                editor_togglePreventUninstallation.putBoolean("switchPreventUninstallation", false)
-                editor_togglePreventUninstallation.apply()
-                setUninstallBlocked(null, "com.example.ALMD_AppLockforMobileDevice", switchPreventUninstallation)
-                togglePreventUninstallation.isChecked = false
             }
         }
 
@@ -76,13 +55,5 @@ class MainMenuActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         return
-    }
-
-    open fun setUninstallBlocked(
-        admin: ComponentName?,
-        packageName: String,
-        uninstallBlocked: Boolean
-    ): Unit {
-
     }
 }

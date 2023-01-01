@@ -1,6 +1,5 @@
 package com.example.ALMD_AppLockforMobileDevice.AppLockApplication
 
-import android.app.Application
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ApplicationInfo
@@ -35,8 +34,6 @@ class MobileApplicationsActivity : AppCompatActivity() {
         val lockedApps_List = sharedPref_lockedAppsList.getStringSet("lockedAppsList", setOf<String>())?.toMutableList()
         val editor_lockedAppsList = sharedPref_lockedAppsList.edit()
 
-//        this.cacheDir.deleteRecursively()
-
         displayAllApps(view = null)
 
         val mobileApplicationsSelectionBackBtn = findViewById<Button>(R.id.mobileApplicationsSelection_backBtn)
@@ -66,14 +63,13 @@ class MobileApplicationsActivity : AppCompatActivity() {
         appAdapter = AppAdapter(this@MobileApplicationsActivity, allApps)
         allAppsList!!.adapter = appAdapter
 
-        //Total Number of Installed-Apps(i.e. List Size)
         val totalApps: String = allAppsList!!.count.toString() + ""
         val countApps: TextView = findViewById<TextView>(R.id.countApps)
         countApps.text = "Total apps: $totalApps"
     }
 
     private fun getAllApps(): List<AppList> {
-        val intent: Intent = Intent(Intent.ACTION_MAIN, null)
+        val intent = Intent(Intent.ACTION_MAIN, null)
         intent.addCategory(Intent.CATEGORY_LAUNCHER)
 
         val pm: PackageManager = packageManager
@@ -120,7 +116,6 @@ class MobileApplicationsActivity : AppCompatActivity() {
         override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
             var convertView: View? = convertView
             var viewHolder: ViewHolder
-//            var checkedState = BooleanArray(listStorage!!.size) { false }
 
             if (convertView == null) {
                 viewHolder = ViewHolder()
@@ -150,7 +145,6 @@ class MobileApplicationsActivity : AppCompatActivity() {
             viewHolder.textInListView!!.text = listStorage!![position].getName()
             viewHolder.imageInListView!!.setImageDrawable(listStorage!![position].getIcon())
             viewHolder.pkgNameInListView!!.text = listStorage!![position].getPkgName()
-//            viewHolder.checkBoxInListView!!.isChecked = listStorage!![position].isSelected()!! // Kept crashing
             return convertView!!
         }
 
@@ -182,14 +176,6 @@ class MobileApplicationsActivity : AppCompatActivity() {
         @JvmName("getIcon1")
         fun getIcon(): Drawable {
             return icon
-        }
-
-        fun isSelected(): Boolean? {
-            return selected
-        }
-
-        fun setSelected(checked: Boolean) {
-            this.selected = selected
         }
     }
 

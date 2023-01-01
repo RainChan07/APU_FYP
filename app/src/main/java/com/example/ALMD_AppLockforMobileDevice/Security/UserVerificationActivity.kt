@@ -6,9 +6,6 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.Toast
-import androidx.biometric.BiometricManager
-import androidx.biometric.BiometricManager.Authenticators.BIOMETRIC_STRONG
-import androidx.biometric.BiometricManager.Authenticators.DEVICE_CREDENTIAL
 import androidx.biometric.BiometricPrompt
 import androidx.constraintlayout.widget.ConstraintLayoutStates.TAG
 import androidx.core.content.ContextCompat
@@ -30,12 +27,10 @@ class UserVerificationActivity : AppCompatActivity() {
         setContentView(R.layout.user_verification)
 
         val sharedPref_unlockingApp = getSharedPreferences("unlockingApp", MODE_PRIVATE)
-        val editor_unlockingApp = sharedPref_unlockingApp.edit()
         val unlockingApp: String? = sharedPref_unlockingApp.getString("unlockingApp", null)
 
         val sharedPref_AU = getSharedPreferences("afterUnlock", MODE_PRIVATE)
         val editor_AU = sharedPref_AU.edit()
-        val afterUnlock: String? = sharedPref_AU.getString("afterUnlock", null)
 
         val sharedPref_locked = getSharedPreferences("locked", MODE_PRIVATE)
         val editor_locked = sharedPref_locked.edit()

@@ -2,14 +2,9 @@ package com.example.ALMD_AppLockforMobileDevice.Services
 
 import android.accessibilityservice.AccessibilityService
 import android.accessibilityservice.AccessibilityServiceInfo
-import android.content.Intent
-import android.os.Handler
 import android.util.Log
 import android.view.accessibility.AccessibilityEvent
-import android.widget.Toast
-import java.util.*
 import kotlin.collections.ArrayList
-import kotlin.concurrent.schedule
 
 
 @Suppress("DEPRECATED_IDENTITY_EQUALS")
@@ -17,7 +12,6 @@ class AccessibilitySvc : AccessibilityService() {
     override fun onServiceConnected() {
         super.onServiceConnected()
 
-        //Configure these here for compatibility with API 13 and below.
         val config = AccessibilityServiceInfo()
         config.eventTypes = AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED
         config.feedbackType = AccessibilityServiceInfo.FEEDBACK_GENERIC
@@ -37,7 +31,6 @@ class AccessibilitySvc : AccessibilityService() {
 
             val sharedPref_locked = getSharedPreferences("locked", MODE_PRIVATE)
             val editor_locked = sharedPref_locked.edit()
-            val locked: String? = sharedPref_locked.getString("locked", null)
 
             val currentApp: String = accessibilityEvent.packageName.toString()
 
