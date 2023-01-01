@@ -51,18 +51,13 @@ class MobileApplicationsActivity : AppCompatActivity() {
         }
 
         val mobileApplicationsSelectionNextBtn = findViewById<Button>(R.id.mobileApplicationsSelection_nextBtn)
-        mobileApplicationsSelectionNextBtn.setOnClickListener (View.OnClickListener{
+        mobileApplicationsSelectionNextBtn.setOnClickListener {
             editor_lockedAppsList.putStringSet("lockedAppsList", lockedAppsList.toSet())
             editor_lockedAppsList.apply()
 
-            if ((master_Pin != null) && (lockedApps_List != null)) {
-                val toMainMenuActivity = Intent(this, MainMenuActivity::class.java)
-                startActivity(toMainMenuActivity)
-            } else {
-                Toast.makeText(applicationContext, "Please select at least 1 application to lock", Toast.LENGTH_SHORT).show()
-                return@OnClickListener
-            }
-        })
+            val toMainMenuActivity = Intent(this, MainMenuActivity::class.java)
+            startActivity(toMainMenuActivity)
+        }
     }
 
     fun displayAllApps(view: View?) {

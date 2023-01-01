@@ -38,6 +38,10 @@ class AccessibilitySvc : AccessibilityService() {
             val sharedPref_currentApp = getSharedPreferences("currentApp", MODE_PRIVATE)
             val editor_currentApp = sharedPref_currentApp.edit()
 
+            val sharedPref_locked = getSharedPreferences("locked", MODE_PRIVATE)
+            val editor_locked = sharedPref_locked.edit()
+            val locked: String? = sharedPref_locked.getString("locked", null)
+
             val currentApp: String = accessibilityEvent.packageName.toString()
             Log.d("Current App - Package Name", currentApp)
             editor_currentApp.clear()
@@ -67,8 +71,9 @@ class AccessibilitySvc : AccessibilityService() {
                                     editor_unlockingApp.clear()
                                     editor_unlockingApp.apply()
                                     editor_unlockingApp.putString("unlockingApp", pkgName)
-                                    Log.d("Unlocking App - Package Name", pkgName)
                                     editor_unlockingApp.apply()
+                                    editor_locked.putString("locked", "true")
+                                    editor_locked.apply()
                                     val launchALMDSecurity = packageManager.getLaunchIntentForPackage("com.example.ALMD_AppLockforMobileDevice")
                                     startActivity(launchALMDSecurity)
                                 }
