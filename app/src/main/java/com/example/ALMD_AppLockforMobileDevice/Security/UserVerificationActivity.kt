@@ -37,6 +37,10 @@ class UserVerificationActivity : AppCompatActivity() {
         val editor_AU = sharedPref_AU.edit()
         val afterUnlock: String? = sharedPref_AU.getString("afterUnlock", null)
 
+        val sharedPref_locked = getSharedPreferences("locked", MODE_PRIVATE)
+        val editor_locked = sharedPref_locked.edit()
+        val locked: String? = sharedPref_locked.getString("locked", null)
+
         val toMainMenuActivity = Intent(this, MainMenuActivity::class.java)
         val toEnterPIN = Intent(this, EnterPINActivity::class.java)
 
@@ -45,19 +49,6 @@ class UserVerificationActivity : AppCompatActivity() {
 
         masterPinLogin.setOnClickListener {
             startActivity(toEnterPIN)
-        }
-
-        val biometricManager = BiometricManager.from(this)
-        when (biometricManager.canAuthenticate(BIOMETRIC_STRONG or DEVICE_CREDENTIAL)) {
-            BiometricManager.BIOMETRIC_SUCCESS ->
-                Toast.makeText(this, "Biometrics are available", Toast.LENGTH_SHORT).show()
-            BiometricManager.BIOMETRIC_ERROR_NO_HARDWARE ->
-                Toast.makeText(this, "Biometrics are not available\nTry using Master PIN instead", Toast.LENGTH_SHORT).show()
-            BiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE ->
-                Toast.makeText(this, "Biometrics are not available at the moment\nTry using Master PIN instead", Toast.LENGTH_SHORT).show()
-            BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED -> {
-                Toast.makeText(this, "Try using Master PIN instead", Toast.LENGTH_SHORT).show()
-            }
         }
 
         executor = ContextCompat.getMainExecutor(this)
@@ -73,10 +64,12 @@ class UserVerificationActivity : AppCompatActivity() {
             override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
                 super.onAuthenticationSucceeded(result)
                 Toast.makeText(applicationContext, "Authentication succeeded", Toast.LENGTH_SHORT).show()
-                if (unlockingApp != null) {
+                if (locked != null) {
                     editor_AU.putString("afterUnlock", "1")
                     editor_AU.apply()
-                    val launchLockedApp = packageManager.getLaunchIntentForPackage(unlockingApp)
+                    editor_locked.clear()
+                    editor_locked.apply()
+                    val launchLockedApp = packageManager.getLaunchIntentForPackage(unlockingApp.toString())
                     startActivity(launchLockedApp)
                 } else {
                     startActivity(toMainMenuActivity)

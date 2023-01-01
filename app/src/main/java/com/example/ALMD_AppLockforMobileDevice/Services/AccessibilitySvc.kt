@@ -35,19 +35,11 @@ class AccessibilitySvc : AccessibilityService() {
             val editor_unlockingApp = sharedPref_unlockingApp.edit()
             val unlockingApp: String? = sharedPref_unlockingApp.getString("unlockingApp", null)
 
-            val sharedPref_currentApp = getSharedPreferences("currentApp", MODE_PRIVATE)
-            val editor_currentApp = sharedPref_currentApp.edit()
-
             val sharedPref_locked = getSharedPreferences("locked", MODE_PRIVATE)
             val editor_locked = sharedPref_locked.edit()
             val locked: String? = sharedPref_locked.getString("locked", null)
 
             val currentApp: String = accessibilityEvent.packageName.toString()
-            Log.d("Current App - Package Name", currentApp)
-            editor_currentApp.clear()
-            editor_currentApp.apply()
-            editor_currentApp.putString("currentApp", currentApp)
-            editor_currentApp.apply()
 
             if ((currentApp != unlockingApp) && (unlockingApp != "com.example.ALMD_AppLockforMobileDevice")) {
                 editor_AU.clear()
