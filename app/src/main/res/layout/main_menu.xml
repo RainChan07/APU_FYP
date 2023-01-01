@@ -70,7 +70,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mainMenu_modifyMasterPinBtn" />
 
-<!--    <ListView-->
+    <Switch
+        android:id="@+id/togglePreventUninstallation"
+        android:layout_width="251dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Prevent Uninstallation"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toggleBiometrics"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <!--    <ListView-->
 <!--        android:id="@+id/all_apps_list"-->
 <!--        android:layout_width="375dp"-->
 <!--        android:layout_height="0dp"-->

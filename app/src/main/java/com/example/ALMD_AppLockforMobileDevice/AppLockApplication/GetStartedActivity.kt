@@ -22,9 +22,9 @@ class GetStartedActivity : AppCompatActivity() {
         val master_Pin: String? = sharedPref_masterPin.getString("masterPIN", null)
 
         val sharedPref_toggleBiometrics = getSharedPreferences("allowBiometrics", MODE_PRIVATE)
-        val onOrOff: Boolean = sharedPref_toggleBiometrics.getBoolean("onOrOff", false)
+        val switchBiometrics: Boolean = sharedPref_toggleBiometrics.getBoolean("switchBiometrics", false)
 
-        if (master_Pin != null && onOrOff) {
+        if (master_Pin != null && switchBiometrics) {
             val toUserVerification = Intent(this, UserVerificationActivity::class.java)
             startActivity(toUserVerification)
         } else if (master_Pin != null) {

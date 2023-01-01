@@ -38,6 +38,10 @@ class EnterPINActivity : AppCompatActivity() {
         val editor_AU = sharedPref_AU.edit()
         val afterUnlock: String? = sharedPref_AU.getString("afterUnlock", null)
 
+        val sharedPref_currentApp = getSharedPreferences("currentApp", MODE_PRIVATE)
+        val editor_currentApp = sharedPref_currentApp.edit()
+        val currentApp: String? = sharedPref_unlockingApp.getString("currentApp", null)
+
         mPCode1 = findViewById(R.id.mPCode1)
         mPCode2 = findViewById(R.id.mPCode2)
         mPCode3 = findViewById(R.id.mPCode3)
@@ -73,9 +77,8 @@ class EnterPINActivity : AppCompatActivity() {
                 if (unlockingApp != null) {
                     editor_AU.putString("afterUnlock", "1")
                     editor_AU.apply()
-                    val launchLockedApp = packageManager.getLaunchIntentForPackage(unlockingApp)
+                    val launchLockedApp = packageManager.getLaunchIntentForPackage(unlockingApp.toString())
                     startActivity(launchLockedApp)
-                    finish() // Prevent back access to retrieve PIN code
                 } else {
                     val toMainMenuActivity = Intent(this, MainMenuActivity::class.java)
                     startActivity(toMainMenuActivity)
