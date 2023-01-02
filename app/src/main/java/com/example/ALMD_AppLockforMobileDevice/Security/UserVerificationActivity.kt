@@ -78,7 +78,7 @@ class UserVerificationActivity : AppCompatActivity() {
         })
 
         promptInfo = BiometricPrompt.PromptInfo.Builder()
-            .setTitle("Biometric login for my app")
+            .setTitle("Biometric Login: ALMD")
             .setSubtitle("Log in using your biometric credential")
             .setNegativeButtonText("Use Master PIN instead")
             .build()
