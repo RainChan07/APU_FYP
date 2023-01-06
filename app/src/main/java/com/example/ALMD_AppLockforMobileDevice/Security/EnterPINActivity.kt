@@ -15,6 +15,8 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.security.crypto.EncryptedSharedPreferences
+import androidx.security.crypto.MasterKeys
 import com.example.ALMD_AppLockforMobileDevice.AppLockApplication.MainMenuActivity
 import com.example.ALMD_AppLockforMobileDevice.R
 
@@ -33,7 +35,14 @@ class EnterPINActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.enter_pin)
 
-        val sharedPref_masterPin = getSharedPreferences("masterPin", MODE_PRIVATE)
+        val masterKey = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
+        val sharedPref_masterPin = EncryptedSharedPreferences.create(
+            "masterPINFile",
+            masterKey,
+            applicationContext,
+            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+        )
         val master_Pin: String? = sharedPref_masterPin.getString("masterPIN", null)
 
         val sharedPref_unlockingApp = getSharedPreferences("unlockingApp", MODE_PRIVATE)

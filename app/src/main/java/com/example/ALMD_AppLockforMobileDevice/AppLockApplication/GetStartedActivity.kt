@@ -9,7 +9,11 @@ package com.example.ALMD_AppLockforMobileDevice.AppLockApplication
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.security.crypto.EncryptedSharedPreferences
+import androidx.security.crypto.MasterKey
+import androidx.security.crypto.MasterKeys
 import com.example.ALMD_AppLockforMobileDevice.R
 import com.example.ALMD_AppLockforMobileDevice.Security.EnterPINActivity
 import com.example.ALMD_AppLockforMobileDevice.Security.UserVerificationActivity
@@ -23,7 +27,14 @@ class GetStartedActivity : AppCompatActivity() {
 
         runAccessibilityService()
 
-        val sharedPref_masterPin = getSharedPreferences("masterPin", MODE_PRIVATE)
+        val masterKey = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
+        val sharedPref_masterPin = EncryptedSharedPreferences.create(
+            "masterPINFile",
+            masterKey,
+            applicationContext,
+            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+        )
         val master_Pin: String? = sharedPref_masterPin.getString("masterPIN", null)
 
         val sharedPref_toggleBiometrics = getSharedPreferences("allowBiometrics", MODE_PRIVATE)

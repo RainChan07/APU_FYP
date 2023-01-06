@@ -18,6 +18,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.security.crypto.EncryptedSharedPreferences
+import androidx.security.crypto.MasterKeys
 import com.example.ALMD_AppLockforMobileDevice.R
 
 
@@ -33,7 +35,14 @@ class MobileApplicationsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.mobile_applications_selection)
 
-        val sharedPref_masterPin = getSharedPreferences("masterPin", MODE_PRIVATE)
+        val masterKey = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
+        val sharedPref_masterPin = EncryptedSharedPreferences.create(
+            "masterPINFile",
+            masterKey,
+            applicationContext,
+            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+        )
         val master_Pin: String? = sharedPref_masterPin.getString("masterPIN", null)
 
         val sharedPref_lockedAppsList = getSharedPreferences("lockedAppsList", MODE_PRIVATE)
