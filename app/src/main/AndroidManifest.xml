@@ -55,7 +55,7 @@
         <activity
             android:name=".PublicActivity"
             android:exported="true" />
-        // The PublicActivity is always the first activity of the application when opened
+        // The PublicActivity can be the first activity of the application when opened
        
         <activity
             android:name=".ProtectedActivity"
