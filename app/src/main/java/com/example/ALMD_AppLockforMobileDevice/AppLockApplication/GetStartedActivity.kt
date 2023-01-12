@@ -25,29 +25,6 @@ class GetStartedActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.get_started)
 
-        runAccessibilityService()
-
-        val masterKey = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
-        val sharedPref_masterPin = EncryptedSharedPreferences.create(
-            "masterPINFile",
-            masterKey,
-            applicationContext,
-            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
-            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
-        )
-        val master_Pin: String? = sharedPref_masterPin.getString("masterPIN", null)
-
-        val sharedPref_toggleBiometrics = getSharedPreferences("allowBiometrics", MODE_PRIVATE)
-        val switchBiometrics: Boolean = sharedPref_toggleBiometrics.getBoolean("switchBiometrics", false)
-
-        if (master_Pin != null && switchBiometrics) {
-            val toUserVerification = Intent(this, UserVerificationActivity::class.java)
-            startActivity(toUserVerification)
-        } else if (master_Pin != null) {
-            val toEnterPin = Intent(this, EnterPINActivity::class.java)
-            startActivity(toEnterPin)
-        }
-
         val getStartedNextBtn = findViewById<Button>(R.id.getStarted_nextBtn)
         getStartedNextBtn.setOnClickListener {
             val toDevNotes = Intent(this, DevNotesActivity::class.java)
