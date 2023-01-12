@@ -45,42 +45,34 @@
         <activity
             android:name=".AppLockApplication.DevNotesActivity"
             android:configChanges="orientation"
-            android:exported="false"
+            android:exported="true"
             android:screenOrientation="portrait" />
         <activity
             android:name=".AppLockApplication.MasterPINActivity"
             android:configChanges="orientation"
-            android:exported="false"
+            android:exported="true"
             android:screenOrientation="portrait" />
         <activity
             android:name=".AppLockApplication.MobileApplicationsActivity"
             android:configChanges="orientation"
-            android:exported="false"
+            android:exported="true"
             android:screenOrientation="portrait" />
         <activity
             android:name=".AppLockApplication.MainMenuActivity"
             android:configChanges="orientation"
-            android:exported="false"
-            android:screenOrientation="portrait"/>
+            android:exported="true"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Security.UserVerificationActivity"
             android:configChanges="orientation"
             android:exported="true"
             android:screenOrientation="portrait" >
-            <intent-filter>
-                <action android:name="com.example.ALMD_AppLockforMobileDevice.Biometrics_Allowed"/>
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".Security.EnterPINActivity"
             android:configChanges="orientation"
             android:exported="true"
-            android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="com.example.ALMD_AppLockforMobileDevice.PIN_Only"/>
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
+            android:screenOrientation="portrait" >
         </activity>
         <service
             android:name=".Services.AccessibilitySvc"
