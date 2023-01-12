@@ -2,20 +2,20 @@
 val masterKey = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
 // Acquire master key with the encryption algorithm as AES256
 
-val sharedPref_masterPin = EncryptedSharedPreferences.create(
-    "masterPINFile",
+val encryptedSP = EncryptedSharedPreferences.create(
+    "encryptedSPFile",
     masterKey,
     applicationContext,
     EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
     EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
 )
-// Create the SharedPreferences file as it encrypts both the key and value
+// Create the access to SharedPreferences file as it encrypts both the key and value
 
-val master_Pin: String? = sharedPref_masterPin.getString("masterPin", null)
+val stringValue: String? = encryptedSP.getString("keyValue", null)
 // Get value from the encrypted SharedPreferences file as you normally would
 
-val editor_masterPin = sharedPref_masterPin.edit()
-// Initialize the editor for the Master PIN SharedPreferences
+val editorESP = encryptedSP.edit()
+// Initialize the editor for the Encrypted SharedPreferences
 
 
 // Programmer Name: Mr.Chan Yu Heng
