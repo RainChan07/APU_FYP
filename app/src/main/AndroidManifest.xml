@@ -38,7 +38,6 @@
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -67,12 +66,20 @@
             android:configChanges="orientation"
             android:exported="true"
             android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="com.example.ALMD_AppLockforMobileDevice.Biometrics_Allowed"/>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".Security.EnterPINActivity"
             android:configChanges="orientation"
             android:exported="true"
             android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="com.example.ALMD_AppLockforMobileDevice.PIN_Only"/>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
         <service
             android:name=".Services.AccessibilitySvc"
