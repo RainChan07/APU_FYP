@@ -46,6 +46,25 @@
             android:configChanges="orientation"
             android:exported="true"
             android:screenOrientation="portrait" />
+        
+        // Testing for ASC Vulnerability Testing (Secure Code Implementation)
+        
+        // True  : Broadcast Receiver can receive events sent by same OR other applications
+        // False‍ : Broadcast Receiver can receive events sent by same application
+        
+        <activity
+            android:name=".PublicActivity"
+            android:exported="true" />
+        // The PublicActivity is always the first activity of the application when opened
+       
+        <activity
+            android:name=".ProtectedActivity"
+            android:exported="false" />
+        // The ProtectedActivity is one of the internal activity that should be protected
+           and hidden from other applications
+        
+        // End
+        
         <activity
             android:name=".AppLockApplication.MasterPINActivity"
             android:configChanges="orientation"
