@@ -1,3 +1,16 @@
+
+if (condition1 == true) {
+    // If condition 1 has been met, move over to thisActivity
+    val toThisActivity = Intent(this, thisActivity::class.java)
+    startActivity(toThisActivity)
+} else if (condition2 == true) {
+    // If condition 2 has been met, move over to thatActivity instead
+    val toThatActivity = Intent(this, thatActivity::class.java)
+    startActivity(toThatActivity)
+} else {
+    // If neither conditions have been met, continue with this activity
+}
+
 // Programmer Name: Mr.Chan Yu Heng
 // Program Name: ALMD_AppLockforMobileDevice
 // Description: To lock mobile applications
