@@ -34,15 +34,8 @@ class MasterPINActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.master_pin_initial_setup)
 
-        val masterKey = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
-        val sharedPref_masterPin = EncryptedSharedPreferences.create(
-            "masterPINFile",
-            masterKey,
-            applicationContext,
-            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
-            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
-        )
-        val master_Pin: String? = sharedPref_masterPin.getString("masterPin", null)
+        val sharedPref_masterPin = getSharedPreferences("masterPin", MODE_PRIVATE)
+        val master_Pin: String? = sharedPref_masterPin.getString("masterPIN", null)
         val editor_masterPin = sharedPref_masterPin.edit()
 
         val sharedPref_lockedAppsList = getSharedPreferences("lockedAppsList", MODE_PRIVATE)
