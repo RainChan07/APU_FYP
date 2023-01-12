@@ -1,3 +1,4 @@
+
 val masterKey = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
 // Acquire master key with the encryption algorithm as AES256
 
